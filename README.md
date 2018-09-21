@@ -1,8 +1,8 @@
-# d3-chloropleth (FCC data visualization project)
+# d3-choropleth (FCC data visualization project)
 
 ### [url](url)
 
-![dc-cloropleth screenshot](https://raw.githubusercontent.com/rifkegribenes/dc-cloropleth/master/screenshot.jpg)
+![dc-choropleth screenshot](https://raw.githubusercontent.com/rifkegribenes/dc-choropleth/master/screenshot.jpg)
 
 ### User Stories
 
