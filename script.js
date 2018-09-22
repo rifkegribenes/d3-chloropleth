@@ -56,21 +56,24 @@ g.call(d3.axisBottom(x)
 
 // render map
 const render = (error, us, education) => {
-  console.log('render');
-  console.log(us);
   if (error) throw error;
 
   const edArray = education.map(county => county.bachelorsOrHigher);
 
+  // find matching county data from education array
   const countyDataCallback = (d, col) => {
     const countyData = education.find((county) => county.fips === d.id);
     if (countyData) {
+      // if col = true, return fill color corresponding to ed level
+      // otherwise, return ed level for matching county
       return col ? color(countyData.bachelorsOrHigher) : countyData.bachelorsOrHigher;
+      // if no matching county, return 0 (or fill color for 0)
     } else {
       return col ? color(0) : 0;
     }
   }
 
+  // show tooltip
   const showTip = (d, data) => {
     d3.select("#tooltip")
       .style("visibility", "visible")
@@ -80,6 +83,7 @@ const render = (error, us, education) => {
       .html(() => `<span class="tip-name">${data.area_name}, ${data.state}</span><br><span class="tip-mass">${data.bachelorsOrHigher}%</span>`);
   }
 
+  // hide tooltip
   const hideTip = () => {
     d3.select("#tooltip")
       .style("visibility", "hidden")
