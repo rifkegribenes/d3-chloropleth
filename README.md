@@ -2,7 +2,7 @@
 
 ### [url](url)
 
-![dc-choropleth screenshot](https://raw.githubusercontent.com/rifkegribenes/dc-choropleth/master/screenshot.jpg)
+![dc-choropleth screenshot](https://raw.githubusercontent.com/rifkegribenes/dc-choropleth/master/screenshot.png)
 
 ### User Stories
 
