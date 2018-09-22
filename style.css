@@ -8,9 +8,9 @@ body {
 	font-family: 'Titillium Web', sans-serif;
 }
 
-/*.county {
-  fill: none;
-}*/
+.map {
+  margin: auto;
+}
 
 .state {
   fill: none;

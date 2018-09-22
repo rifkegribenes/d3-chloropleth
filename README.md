@@ -1,8 +1,8 @@
 # d3-choropleth (FCC data visualization project)
 
-### [url](url)
+### [http://rifkegribenes-d3-choropleth.surge.sh/](http://rifkegribenes-d3-choropleth.surge.sh/)
 
-![dc-choropleth screenshot](https://raw.githubusercontent.com/rifkegribenes/dc-choropleth/master/screenshot.png)
+![dc-choropleth screenshot](https://github.com/rifkegribenes/d3-choropleth/blob/master/screenshot.png?raw=true)
 
 ### User Stories
 
