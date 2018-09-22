@@ -43,6 +43,16 @@ body {
   border-radius: 2px;
 }
 
+#tooltip {
+  line-height: 1;
+  color: #fff;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 2px;
+  position: absolute;
+  visibility: hidden;
+}
+
 .tip-name{
 	font-weight: 700;
 	text-align: center;
@@ -54,7 +64,7 @@ body {
 	text-align: center;
 }
 
-.d3-tip:after {
+#tooltip:after {
   box-sizing: border-box;
   display: inline;
   font-size: 10px;
@@ -66,7 +76,7 @@ body {
   text-align: center;
 }
 
-.d3-tip.n:after {
+#tooltip.n:after {
   margin: -1px 0 0 0;
   top: 100%;
   left: 0;

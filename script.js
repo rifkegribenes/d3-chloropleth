@@ -3,6 +3,11 @@ const svg = d3.select("svg");
 const education = d3.map();
 const path = d3.geoPath();
 
+// add html for tooltip
+d3.select("body")
+  .append("div")
+  .attr("id", "tooltip");
+
 // initialize scales
 const x = d3.scaleLinear()
     .domain([2.6, 75.1])
@@ -55,23 +60,30 @@ const render = (error, us, education) => {
   console.log(us);
   if (error) throw error;
 
+  const edArray = education.map(county => county.bachelorsOrHigher);
+
   const countyDataCallback = (d, col) => {
-    const countyData = education.filter((ed) => ed.fips === d.id);
-    if (countyData[0]) {
-      return col ? color(countyData[0].bachelorsOrHigher) : countyData[0].bachelorsOrHigher;
+    const countyData = education.find((county) => county.fips === d.id);
+    if (countyData) {
+      return col ? color(countyData.bachelorsOrHigher) : countyData.bachelorsOrHigher;
     } else {
       return col ? color(0) : 0;
     }
   }
 
-  // initialize tooltips
-  const tip = d3.tip()
-    .attr('class', 'd3-tip')
-    .attr('id', 'tooltip')
-    .offset([-10, 0])
-    .html((d) => `<span class="tip-name">${d.area_name}, ${d.state}</span><br><span class="tip-mass">${d.bachelorsOrHigher}%</span>`);
+  const showTip = (d, data) => {
+    d3.select("#tooltip")
+      .style("visibility", "visible")
+      .style("top", `${d3.event.pageY}px`)
+      .style("left", `${d3.event.pageX + 20}px`)
+      .attr("data-education", () => education.find(county => county.fips === d.id).bachelorsOrHigher)
+      .html(() => `<span class="tip-name">${data.area_name}, ${data.state}</span><br><span class="tip-mass">${data.bachelorsOrHigher}%</span>`);
+  }
 
-  svg.call(tip);
+  const hideTip = () => {
+    d3.select("#tooltip")
+      .style("visibility", "hidden")
+  }
 
   // add county data
   svg.append("g")
@@ -81,15 +93,12 @@ const render = (error, us, education) => {
     .enter().append("path")
       .attr("class", "county")
       .attr("data-fips", (d) => d.id)
-      .attr("data-education", (d) => countyDataCallback(d.id))
+      .attr("data-education", (d) => countyDataCallback(d))
       .attr("fill", (d) => countyDataCallback(d, true))
       .attr("d", path)
       // add tooltips
-      .on('mouseover', (d) => {
-        const data = education.filter(ed => d.id === ed.fips)[0];
-        tip.show(data);
-      })
-      .on('mouseout', tip.hide);
+      .on('mouseover', (d) => showTip(d, education.find((county) => county.fips === d.id)))
+      .on('mouseout', () => hideTip());
 
   // add state borders
   svg.append("path")
